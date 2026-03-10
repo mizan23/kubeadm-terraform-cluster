@@ -7,5 +7,5 @@ variable "key_name" {
 }
 
 variable "worker_count" {
-  default = 5
+  default = 2
 }
