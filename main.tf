@@ -16,6 +16,11 @@ module "compute" {
   private_subnet  = module.network.private_subnet_id
   security_group  = module.security.security_group_id
 
+  depends_on = [
+    module.network.nat_gateway_id,
+    module.security
+  ]
+
   key_name        = var.key_name
   instance_type   = var.instance_type
   worker_count    = var.worker_count

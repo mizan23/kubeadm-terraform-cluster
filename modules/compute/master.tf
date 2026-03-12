@@ -11,6 +11,11 @@ resource "aws_instance" "master" {
 
   user_data = file("${path.module}/../../scripts/master.sh")
 
+  depends_on = [
+    var.public_subnet,
+    var.security_group
+  ]
+
   tags = {
     Name = "kube-master"
   }
