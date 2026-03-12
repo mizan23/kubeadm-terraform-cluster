@@ -6,13 +6,12 @@ resource "aws_instance" "worker" {
   instance_type = var.instance_type
   key_name      = var.key_name
 
-  subnet_id              = aws_subnet.private_subnet.id
-  vpc_security_group_ids = [aws_security_group.kube_sg.id]
+  subnet_id              = var.private_subnet
+  vpc_security_group_ids = [var.security_group]
+
   associate_public_ip_address = false
 
-  
-
-  user_data = templatefile("scripts/worker.sh", {
+  user_data = templatefile("${path.module}/../../scripts/worker.sh", {
     master_ip = aws_instance.master.private_ip
   })
 
